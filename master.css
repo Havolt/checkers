@@ -2,9 +2,15 @@ body, html{
   background-color: #f7f7f7;
 }
 
+#app{
+  width: 640px;
+  margin: 20px auto;
+}
+
 .tile{
-  width: 200px;
-  height: 200px;
+  width: 80px;
+  height: 80px;
+  float: left;
 }
 
 .lightTile{
