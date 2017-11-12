@@ -20,3 +20,17 @@ body, html{
 .darkTile{
   background-color: #D18B47;
 }
+
+.allPieces{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.darkPieces{
+  background-color: #602a06;
+}
+
+.lightPieces{
+  background-color: #e2c7b5;
+}

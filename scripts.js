@@ -1,8 +1,12 @@
 
 let boardArr = [];
 
+const tileAmt = 8;
+const initCheckerAmt = 20;
+
 let lightPieces = [];
 let darkPieces = [];
+let aaaa = 'lol';
 
 
 function buildBoard(){
@@ -10,8 +14,8 @@ function buildBoard(){
   let colorBool = true;
   let firstTime = true;
 
-  for(var i = 1; i < 9; i++){
-    for(var j = 1; j < 9; j++){
+  for(var i = 1; i < tileAmt+1; i++){
+    for(var j = 1; j < tileAmt+1; j++){
       if(j == 1 && firstTime == false){
         colorBool = !colorBool;
       }
@@ -40,18 +44,35 @@ function buildBoard(){
       }
       tileMaker.id = boardSpace.x + boardSpace.y;
       app.appendChild(tileMaker);
-      console.log(boardSpace);
+      //console.log(boardMaker);
     }
   }
 }
 
-function buildPieces(){
-  
+function buildPieces(color){
+
+
+  for(var i = 0; i < initCheckerAmt; i++){
+
+    const tempPiece = {};
+
+    if(color == 'light'){
+      lightPieces.push(tempPiece);
+    }
+    else{
+      darkPieces.push(tempPiece);
+    }
+
+    
+  }
 }
 
 
 
 (function init(){
   buildBoard();
-  buildPieces();
+  buildPieces('light');
+  buildPieces('dark');
 })();
+
+console.log(lightPieces);
