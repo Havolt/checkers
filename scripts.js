@@ -56,47 +56,55 @@ function buildPieces(color){
   let arrRun2 = boardArr.length -1;
 
   for(var i = 0; i < initCheckerAmt; i++){
-
     const tempPiece = {};
-
     tempPiece.crowned = false;
     tempPiece.active = true;
-
-
-    if(color == 'light'){
-      tempPiece.class = "allPieces lightPieces";
+    if(color == 'dark'){
+      tempPiece.class = "allPieces darktPieces";
       while(!boardArr[arrRun].legalPlay || !boardArr[arrRun].empty){
         arrRun++;
       }
       tempPiece.tileLocation = boardArr[arrRun].x + boardArr[arrRun].y;
       boardArr[arrRun].empty = false;
       arrRun++;
-      lightPieces.push(tempPiece);
-
+      darkPieces.push(tempPiece);
     }
     else{
-      tempPiece.class = "allPieces darkPieces";
+      tempPiece.class = "allPieces lightPieces";
       while(!boardArr[arrRun2].legalPlay || !boardArr[arrRun2].empty){
         arrRun2--;
       }
       tempPiece.tileLocation = boardArr[arrRun2].x + boardArr[arrRun2].y;
       boardArr[arrRun2].empty = false;
       arrRun2--;
-      darkPieces.push(tempPiece);
-
-
+      lightPieces.push(tempPiece);
     }
-
   }
 }
 
+function placePieces(){
+  for(var i = 0; i < lightPieces.length; i++){
+    const lPiece = document.createElement('div');
+    lPiece.classList = "allPieces lightPieces";
+    document.getElementById(lightPieces[i].tileLocation).appendChild(lPiece);
+    //console.log(document.getElementById(''+lightPieces[i].tileLocation));
+
+    const dPiece = document.createElement('div');
+    dPiece.classList = 'allPieces darkPieces';
+    document.getElementById(darkPieces[i].tileLocation).appendChild(dPiece);
+  }
+
+}
 
 
 (function init(){
   buildBoard();
   buildPieces('light');
   buildPieces('dark');
+  placePieces();
 })();
+
+
 
 console.log('light');
 console.log(lightPieces);

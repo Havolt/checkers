@@ -22,6 +22,8 @@ body, html{
 }
 
 .allPieces{
+  margin: 10px auto;
+  border: 1px solid #a39d89;
   width: 60px;
   height: 60px;
   border-radius: 50%;
