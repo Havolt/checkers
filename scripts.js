@@ -7,6 +7,9 @@ const initCheckerAmt = 12;
 let lightPieces = [];
 let darkPieces = [];
 let aaaa = 'lol';
+let whiteTurn = true;
+let pieceChosen = false;
+let pieceChosenId;
 
 
 function buildBoard(){
@@ -49,7 +52,6 @@ function buildBoard(){
   }
 }
 
-
 function buildPieces(color){
 
   let arrRun = 0;
@@ -85,8 +87,9 @@ function buildPieces(color){
 function placePieces(){
   for(var i = 0; i < lightPieces.length; i++){
     const lPiece = document.createElement('div');
-    lPiece.classList = "allPieces lightPieces";
+    lPiece.classList = "allPieces lightPieces activePiece";
     document.getElementById(lightPieces[i].tileLocation).appendChild(lPiece);
+    lPiece.addEventListener('click', lightMove);
     //console.log(document.getElementById(''+lightPieces[i].tileLocation));
 
     const dPiece = document.createElement('div');
@@ -94,6 +97,24 @@ function placePieces(){
     document.getElementById(darkPieces[i].tileLocation).appendChild(dPiece);
   }
 
+}
+
+function lightMove(event){
+
+  if(!pieceChosen){
+    pieceChosen = true;
+    pieceChosenId = event.target.parentElement.id;
+    console.log(event.target.parentElement.id);
+    event.target.style.boxShadow='4px 4px 2px black';
+    event.target.style.margin="6px auto";
+    console.log(event.target.classList);
+    for(var i = 0; i < boardArr; i++){}
+  }
+  else if(event.target.parentElement.id == pieceChosenId){
+    event.target.style.boxShadow='none';
+    event.target.style.margin="10px auto";
+    pieceChosen = false;
+  }
 }
 
 

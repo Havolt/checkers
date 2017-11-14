@@ -29,6 +29,10 @@ body, html{
   border-radius: 50%;
 }
 
+.activePiece:hover{
+  cursor: pointer;
+}
+
 .darkPieces{
   background-color: #602a06;
 }
