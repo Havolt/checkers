@@ -25,6 +25,7 @@ function buildBoard(){
       let boardSpace = {};
       boardSpace.x = i;
       boardSpace.y = String.fromCharCode(64+j);
+      boardSpace.tileLocation = i + String.fromCharCode(64+j);
       boardSpace.empty = true;
       if(colorBool == true){
         boardSpace.color = "light";
@@ -67,6 +68,8 @@ function buildPieces(color){
         arrRun++;
       }
       tempPiece.tileLocation = boardArr[arrRun].x + boardArr[arrRun].y;
+      tempPiece.x = boardArr[arrRun].x;
+      tempPiece.y = boardArr[arrRun].y;
       boardArr[arrRun].empty = false;
       arrRun++;
       darkPieces.push(tempPiece);
@@ -77,6 +80,8 @@ function buildPieces(color){
         arrRun2--;
       }
       tempPiece.tileLocation = boardArr[arrRun2].x + boardArr[arrRun2].y;
+      tempPiece.x = boardArr[arrRun2].x;
+      tempPiece.y = boardArr[arrRun2].y;
       boardArr[arrRun2].empty = false;
       arrRun2--;
       lightPieces.push(tempPiece);
@@ -104,11 +109,30 @@ function lightMove(event){
   if(!pieceChosen){
     pieceChosen = true;
     pieceChosenId = event.target.parentElement.id;
-    console.log(event.target.parentElement.id);
     event.target.style.boxShadow='4px 4px 2px black';
     event.target.style.margin="6px auto";
-    console.log(event.target.classList);
-    for(var i = 0; i < boardArr; i++){}
+
+    for(var i = 0; i < lightPieces.length; i++){
+      if(lightPieces[i].tileLocation == event.target.parentElement.id){
+        if(lightPieces[i].crowned == false){
+          for(var j = 0; j < boardArr.length; j++){
+            if((boardArr[j].x == lightPieces[i].x - 1)){
+              if(boardArr[j].y.charCodeAt(0) >= 65 && boardArr[j].y.charCodeAt(0) <= 72){
+                if(boardArr[j].y.charCodeAt(0) + 1 == lightPieces[i].y.charCodeAt(0)){
+                  console.log(boardArr[j]);
+                }
+                else if(boardArr[j].y.charCodeAt(0) - 1 == lightPieces[i].y.charCodeAt(0)){
+                  console.log(boardArr[j]);
+                }
+              }
+              //console.log(boardArr[j]);
+            }
+          }
+        }
+        console.log(lightPieces[i]);
+        break;
+      }
+    }
   }
   else if(event.target.parentElement.id == pieceChosenId){
     event.target.style.boxShadow='none';
