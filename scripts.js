@@ -49,6 +49,7 @@ function buildBoard(){
   }
 }
 
+
 function buildPieces(color){
 
 
@@ -56,14 +57,18 @@ function buildPieces(color){
 
     const tempPiece = {};
 
+    tempPiece.crowned = false;
+
+
     if(color == 'light'){
+      tempPiece.class = "allPieces darkPieces";
       lightPieces.push(tempPiece);
     }
     else{
+      tempPiece.class = "allPieces lightPieces";
       darkPieces.push(tempPiece);
     }
 
-    
   }
 }
 
@@ -75,4 +80,9 @@ function buildPieces(color){
   buildPieces('dark');
 })();
 
+console.log('light');
 console.log(lightPieces);
+console.log('dark');
+console.log(darkPieces);
+console.log('board');
+console.log(boardArr);
