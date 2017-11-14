@@ -2,7 +2,7 @@
 let boardArr = [];
 
 const tileAmt = 8;
-const initCheckerAmt = 20;
+const initCheckerAmt = 12;
 
 let lightPieces = [];
 let darkPieces = [];
@@ -53,29 +53,38 @@ function buildBoard(){
 function buildPieces(color){
 
   let arrRun = 0;
+  let arrRun2 = boardArr.length -1;
 
   for(var i = 0; i < initCheckerAmt; i++){
 
     const tempPiece = {};
 
     tempPiece.crowned = false;
+    tempPiece.active = true;
 
 
     if(color == 'light'){
-      tempPiece.class = "allPieces darkPieces";
-
+      tempPiece.class = "allPieces lightPieces";
       while(!boardArr[arrRun].legalPlay || !boardArr[arrRun].empty){
         arrRun++;
       }
-
       tempPiece.tileLocation = boardArr[arrRun].x + boardArr[arrRun].y;
       boardArr[arrRun].empty = false;
-      lightPieces.push(tempPiece);
       arrRun++;
+      lightPieces.push(tempPiece);
+
     }
     else{
-      tempPiece.class = "allPieces lightPieces";
+      tempPiece.class = "allPieces darkPieces";
+      while(!boardArr[arrRun2].legalPlay || !boardArr[arrRun2].empty){
+        arrRun2--;
+      }
+      tempPiece.tileLocation = boardArr[arrRun2].x + boardArr[arrRun2].y;
+      boardArr[arrRun2].empty = false;
+      arrRun2--;
       darkPieces.push(tempPiece);
+
+
     }
 
   }
