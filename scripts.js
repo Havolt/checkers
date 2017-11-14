@@ -52,6 +52,7 @@ function buildBoard(){
 
 function buildPieces(color){
 
+  let arrRun = 0;
 
   for(var i = 0; i < initCheckerAmt; i++){
 
@@ -62,7 +63,15 @@ function buildPieces(color){
 
     if(color == 'light'){
       tempPiece.class = "allPieces darkPieces";
+
+      while(!boardArr[arrRun].legalPlay || !boardArr[arrRun].empty){
+        arrRun++;
+      }
+
+      tempPiece.tileLocation = boardArr[arrRun].x + boardArr[arrRun].y;
+      boardArr[arrRun].empty = false;
       lightPieces.push(tempPiece);
+      arrRun++;
     }
     else{
       tempPiece.class = "allPieces lightPieces";
