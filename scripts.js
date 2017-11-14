@@ -10,6 +10,7 @@ let aaaa = 'lol';
 let whiteTurn = true;
 let pieceChosen = false;
 let pieceChosenId;
+let possibleSpaces = [];
 
 
 function buildBoard(){
@@ -104,6 +105,32 @@ function placePieces(){
 
 }
 
+function highlightSpace(space, initSpace){
+
+
+  if(space.empty){
+    console.log(space);
+    possibleSpaces.push(document.getElementById(space.tileLocation));
+    document.getElementById(space.tileLocation).style.backgroundColor="#6283ad";
+    document.getElementById(space.tileLocation).addEventListener('click', function(){
+      moveChecker(space, initSpace)
+    });
+  }
+}
+
+function moveChecker(thisSpace, checkerLoc){
+  console.log(thisSpace);
+  console.log(checkerLoc);
+
+  for(var i = 0; i < lightPieces.length; i++){
+    if(lightPieces[i].tileLocation == checkerLoc){
+      console.log(lightPieces[i]);
+      lightPieces[i].tileLocation = thisSpace.tileLocation;
+      console.log(lightPieces[i]);
+    }
+  }
+}
+
 function lightMove(event){
 
   if(!pieceChosen){
@@ -119,10 +146,11 @@ function lightMove(event){
             if((boardArr[j].x == lightPieces[i].x - 1)){
               if(boardArr[j].y.charCodeAt(0) >= 65 && boardArr[j].y.charCodeAt(0) <= 72){
                 if(boardArr[j].y.charCodeAt(0) + 1 == lightPieces[i].y.charCodeAt(0)){
-                  console.log(boardArr[j]);
+                  highlightSpace(boardArr[j], event.target.parentElement.id)
+
                 }
                 else if(boardArr[j].y.charCodeAt(0) - 1 == lightPieces[i].y.charCodeAt(0)){
-                  console.log(boardArr[j]);
+                  highlightSpace(boardArr[j], event.target.parentElement.id)
                 }
               }
               //console.log(boardArr[j]);
@@ -137,6 +165,10 @@ function lightMove(event){
   else if(event.target.parentElement.id == pieceChosenId){
     event.target.style.boxShadow='none';
     event.target.style.margin="10px auto";
+    for(var i = 0; i < possibleSpaces.length; i++){
+      possibleSpaces[i].style.backgroundColor="#D18B47";
+    }
+    possibleSpaces = [];
     pieceChosen = false;
   }
 }
