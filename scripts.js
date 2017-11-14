@@ -107,9 +107,9 @@ function placePieces(){
 
 function highlightSpace(space, initSpace){
 
-
   if(space.empty){
     console.log(space);
+    document.getElementById(space.tileLocation).style.cursor="pointer";
     possibleSpaces.push(document.getElementById(space.tileLocation));
     document.getElementById(space.tileLocation).style.backgroundColor="#6283ad";
     document.getElementById(space.tileLocation).addEventListener('click', function(){
@@ -122,11 +122,18 @@ function moveChecker(thisSpace, checkerLoc){
   console.log(thisSpace);
   console.log(checkerLoc);
 
+
   for(var i = 0; i < lightPieces.length; i++){
     if(lightPieces[i].tileLocation == checkerLoc){
       console.log(lightPieces[i]);
       lightPieces[i].tileLocation = thisSpace.tileLocation;
       console.log(lightPieces[i]);
+      for(var j = 0; j < possibleSpaces.length; j++){
+        document.getElementById(possibleSpaces[j].id).style.cursor="default";
+        document.getElementById(possibleSpaces[j].id).style.backgroundColor="#D18B47";
+        console.log(possibleSpaces[j].id);
+      }
+      possibleSpaces = [];
     }
   }
 }
@@ -146,11 +153,11 @@ function lightMove(event){
             if((boardArr[j].x == lightPieces[i].x - 1)){
               if(boardArr[j].y.charCodeAt(0) >= 65 && boardArr[j].y.charCodeAt(0) <= 72){
                 if(boardArr[j].y.charCodeAt(0) + 1 == lightPieces[i].y.charCodeAt(0)){
-                  highlightSpace(boardArr[j], event.target.parentElement.id)
+                  highlightSpace(boardArr[j], event.target.parentElement.id);
 
                 }
                 else if(boardArr[j].y.charCodeAt(0) - 1 == lightPieces[i].y.charCodeAt(0)){
-                  highlightSpace(boardArr[j], event.target.parentElement.id)
+                  highlightSpace(boardArr[j], event.target.parentElement.id);
                 }
               }
               //console.log(boardArr[j]);
